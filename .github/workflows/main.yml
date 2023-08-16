@@ -31,7 +31,7 @@ jobs:
           # Add your deployment commands here
 
       - name: Send email notification (optional)
-        uses: dawidd6/action-send-mail@v4
+        uses: softprops/action-gh-release@v1
         with:
           server_address: smtp.gmail.com
           server_port: 587
