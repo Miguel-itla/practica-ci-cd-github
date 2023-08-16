@@ -6,17 +6,17 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build-test-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.x
+          python-version: 3.8
 
       - name: Install dependencies
         run: |
@@ -28,4 +28,15 @@ jobs:
 
       - name: Deploy to test environment
         run: |
-          # Add deployment commands here
+          # Add your deployment commands here
+
+      - name: Send email notification (optional)
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_ADDRESS }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "GitHub Actions Notification"
+          body: "The workflow has completed."
+          to: ${{ secrets.EMAIL_ADDRESS }}
